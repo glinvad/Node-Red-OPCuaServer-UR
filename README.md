@@ -78,7 +78,7 @@ this.sandboxFlowContext.set("isoInputs", 0); //change "isoInputs"
 - Create the device ("Universal Robot"): line 45 - 47 
 ```
 const myDevice = namespace.addFolder(rootFolder.objects, {
-"browseName": "Universal Robot" //change "Universal Robot"
+"browseName": "Universal Robot"							//change "Universal Robot"
 });
 ```
 
@@ -122,7 +122,7 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
   const viewDIO = namespace.addView({
     "organizedBy": rootFolder.views,
-    "browseName": "UR-Digital-Input-Output"	//change "UR-Digital-Input-Output"
+    "browseName": "UR-Digital-Input-Output"							//change "UR-Digital-Input-Output"
  });
 ```
   
@@ -130,7 +130,7 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
   viewDIO.addReference({
     "referenceType": "Organizes",
-    "nodeId": DigitalInput.nodeId	//change "DigitalInput.nodeId"
+    "nodeId": DigitalInput.nodeId							//change "DigitalInput.nodeId"
   });
 ```
   
