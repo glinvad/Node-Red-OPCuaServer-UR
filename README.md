@@ -112,15 +112,21 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 - configere a view on the server: line 241 - 244
 `  const viewDIO = namespace.addView({
+
     "organizedBy": rootFolder.views,
+	
     "browseName": "UR-Digital-Input-Output"
-  });`
+ 
+ });`
   
 - add a reference to the view: line 252 - 255
 
 `  viewDIO.addReference({`
+
 `    "referenceType": "Organizes",`
+
 `    "nodeId": DigitalInput.nodeId`
+
 `  });`
   
 - deploy the Node-Red and wait for the server to light up green 
