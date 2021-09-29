@@ -59,7 +59,7 @@ The OPC UA Compact server can be setup by dobble clicking on it.
 
 ![OPC UA Compact server](https://github.com/glinvad/Node-Red-OPCuaServer-UR/blob/main/Pictures/OPCUACompactserver.jpg)
 
-When the data are avalible globally via the function blocks the servers adresse space can configurede. **See the file: Node-Red Code\OPCUA-Compact-server-adress-space.json**
+When the data are avalible globally via the function blocks the servers adresse space can configurede. **See the file: Node-Red Code\OPCUA-Compact-server-adress-space.json**.
 
 ** How to add a new data point to the server **
 1. Put the data as a global variable, here the variable are "isoOutput" and "IsoInput"
