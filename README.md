@@ -137,7 +137,7 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 - configere a view on the server: line 241 - 244
 
-`  const viewDIO = namespace.addView({
+`  const viewDIO = namespace.addView({`
 
 `    "organizedBy": rootFolder.views,`
 	
