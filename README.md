@@ -75,7 +75,11 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 - Create the device: line 45 - 47 
 
-`const myDevice = namespace.addFolder(rootFolder.objects, {"browseName": "Universal Robot"});`
+`const myDevice = namespace.addFolder(rootFolder.objects, {`
+
+`"browseName": "Universal Robot"`
+
+`});`
 
 - Create the namespace: line 49
 
@@ -88,36 +92,36 @@ When the data are avalible globally via the function blocks the servers adresse 
 - configere the variable as a OPC UA object: line 61 - 82
 
 `//Digital input
-  const DigitalInput = namespace.addVariable({
-    "organizedBy": isoInputs,
-    "browseName": "Input",
-    "nodeId": "ns=1;s=Isolated_Input",
-    "dataType": "Double",
-    "value": {
-      "get": function() {
-        return new Variant({
-          "dataType": DataType.Double,
-          "value": flexServerInternals.sandboxFlowContext.get("isoInput")
-        });
-      },
-      "set": function(variant) {
-        flexServerInternals.sandboxFlowContext.set(
-          "isoInput",
-          parseFloat(variant.value)
-        );
-        return opcua.StatusCodes.Good;
-      }
-    }
-  });`
+`  const DigitalInput = namespace.addVariable({`
+`    "organizedBy": **isoInputs**,`
+`    "browseName": "Input",`
+`    "nodeId": "ns=1;s=Isolated_Input",`
+`    "dataType": "Double",`
+`    "value": {`
+`      "get": function() {`
+`        return new Variant({`
+`          "dataType": DataType.Double,`
+`          "value": flexServerInternals.sandboxFlowContext.get("isoInput")`
+`        });`
+`      },`
+`      "set": function(variant) {`
+`        flexServerInternals.sandboxFlowContext.set(`
+`          "isoInput",`
+`          parseFloat(variant.value)`
+`        );`
+`        return opcua.StatusCodes.Good;`
+`      }`
+`    }`
+`  });`
 
 - configere a view on the server: line 241 - 244
 `  const viewDIO = namespace.addView({
 
-    "organizedBy": rootFolder.views,
+`    "organizedBy": rootFolder.views,`
 	
-    "browseName": "UR-Digital-Input-Output"
+`    "browseName": "UR-Digital-Input-Output"`
  
- });`
+` });`
   
 - add a reference to the view: line 252 - 255
 
