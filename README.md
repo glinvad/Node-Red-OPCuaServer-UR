@@ -122,7 +122,7 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
   const viewDIO = namespace.addView({
     "organizedBy": rootFolder.views,
-    "browseName": "UR-Digital-Input-Output"							//change "UR-Digital-Input-Output"
+    "browseName": "UR-Digital-Input-Output"					//change "UR-Digital-Input-Output"
  });
 ```
   
@@ -130,7 +130,7 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
   viewDIO.addReference({
     "referenceType": "Organizes",
-    "nodeId": DigitalInput.nodeId							//change "DigitalInput.nodeId"
+    "nodeId": DigitalInput.nodeId						//change "DigitalInput.nodeId"
   });
 ```
   
