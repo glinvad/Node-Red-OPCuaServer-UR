@@ -91,7 +91,7 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 - configere the variable as a OPC UA object: line 61 - 82
 
-`//Digital input
+`//Digital input`
 `  const DigitalInput = namespace.addVariable({`
 `    "organizedBy": isoInputs,`
 `    "browseName": "Input",`
