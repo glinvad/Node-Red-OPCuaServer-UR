@@ -95,7 +95,7 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 `  const DigitalInput = namespace.addVariable({`
 
-`    "organizedBy": isoInputs,`
+`    "organizedBy": **isoInputs**,`
 
 `    "browseName": "Input",`
 
