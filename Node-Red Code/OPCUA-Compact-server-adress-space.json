@@ -1,0 +1,296 @@
+function constructAlarmAddressSpace(server, addressSpace, eventObjects, done) {
+  // server = the created node-opcua server
+  // addressSpace = address space of the node-opcua server
+  // eventObjects = add event variables here to hold them in memory from this script
+
+  // internal sandbox objects are:
+  // node = the compact server node,
+  // coreServer = core compact server object for debug and access to NodeOPCUA
+  // this.sandboxNodeContext = node context node-red
+  // this.sandboxFlowContext = flow context node-red
+  // this.sandboxGlobalContext = global context node-red
+  // this.sandboxEnv = env variables
+  // timeout and interval functions as expected from nodejs
+
+  const opcua = coreServer.choreCompact.opcua;
+  const LocalizedText = opcua.LocalizedText;
+  const namespace = addressSpace.getOwnNamespace();
+
+  const Variant = opcua.Variant;
+  const DataType = opcua.DataType;
+  const DataValue = opcua.DataValue;
+
+  var flexServerInternals = this;
+
+
+
+  this.sandboxFlowContext.set("isoInputs", 0);
+
+  this.sandboxFlowContext.set("isoOuputs", 0);
+  
+  this.sandboxFlowContext.set("isoJoint0", 0);
+  this.sandboxFlowContext.set("isoJoint1", 0);
+  this.sandboxFlowContext.set("isoJoint2", 0);
+  this.sandboxFlowContext.set("isoJoint3", 0);
+  this.sandboxFlowContext.set("isoJoint4", 0);
+  this.sandboxFlowContext.set("isoJoint5", 0);
+  
+  
+	
+  coreServer.debugLog("init dynamic address space");
+  const rootFolder = addressSpace.findNode("RootFolder");
+
+  node.warn("construct new address space for OPC UA");
+
+  const myDevice = namespace.addFolder(rootFolder.objects, {
+    "browseName": "Universal Robot"
+  });
+
+  const DigitalInputOutput = namespace.addFolder(myDevice, { "browseName": "Digital InputOutput" });
+  const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"});
+  const isoOutputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Outputs"});
+
+  const RobotJointsDeg = namespace.addFolder(myDevice, { "browseName": "Joints [deg]" });
+  const isoJoint0 = namespace.addFolder(RobotJointsDeg, {"browseName": "Joint0"});
+  const isoJoint1 = namespace.addFolder(RobotJointsDeg, {"browseName": "Joint1"});
+  const isoJoint2 = namespace.addFolder(RobotJointsDeg, {"browseName": "Joint2"});
+  const isoJoint3 = namespace.addFolder(RobotJointsDeg, {"browseName": "Joint3"});
+  const isoJoint4 = namespace.addFolder(RobotJointsDeg, {"browseName": "Joint4"});
+  const isoJoint5 = namespace.addFolder(RobotJointsDeg, {"browseName": "Joint5"});
+
+//Digital input
+  const DigitalInput = namespace.addVariable({
+    "organizedBy": isoInputs,
+    "browseName": "Input",
+    "nodeId": "ns=1;s=Isolated_Input",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoInput")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoInput",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Digital output
+   const DigitalOutput = namespace.addVariable({
+    "organizedBy": isoOutputs,
+    "browseName": "Output",
+    "nodeId": "ns=1;s=Isolated_Output",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoOutput")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoInput",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Joint 0   
+   const Joint0 = namespace.addVariable({
+    "organizedBy": isoJoint0,
+    "browseName": "Joint0",
+    "nodeId": "ns=1;s=Joint0deg",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoJoint0")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoJoint0",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Joint 1 
+   const Joint1 = namespace.addVariable({
+    "organizedBy": isoJoint1,
+    "browseName": "Joint1",
+    "nodeId": "ns=1;s=Joint1deg",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoJoint1")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoJoint1",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Joint 2
+   const Joint2 = namespace.addVariable({
+    "organizedBy": isoJoint2,
+    "browseName": "Joint2",
+    "nodeId": "ns=1;s=Joint2deg",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoJoint2")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoJoint2",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Joint 3
+   const Joint3 = namespace.addVariable({
+    "organizedBy": isoJoint3,
+    "browseName": "Joint3",
+    "nodeId": "ns=1;s=Joint3deg",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoJoint3")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoJoint3",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Joint 4
+   const Joint4 = namespace.addVariable({
+    "organizedBy": isoJoint4,
+    "browseName": "Joint4",
+    "nodeId": "ns=1;s=Joint4deg",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoJoint4")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoJoint4",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+//Joint 5
+   const Joint5 = namespace.addVariable({
+    "organizedBy": isoJoint5,
+    "browseName": "Joint5",
+    "nodeId": "ns=1;s=Joint5deg",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoJoint5")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoJoint5",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });  
+
+  //------------------------------------------------------------------------------
+  // Add a view
+  //------------------------------------------------------------------------------
+  const viewDIO = namespace.addView({
+    "organizedBy": rootFolder.views,
+    "browseName": "UR-Digital-Input-Output"
+  });
+  
+  const viewJoints = namespace.addView({
+    "organizedBy": rootFolder.views,
+    "browseName": "UR-Joints"
+  });
+
+  
+  viewDIO.addReference({
+    "referenceType": "Organizes",
+    "nodeId": DigitalInput.nodeId
+  });
+
+  viewDIO.addReference({
+    "referenceType": "Organizes",
+    "nodeId": DigitalOutput.nodeId
+  });
+  
+  viewJoints.addReference({
+    "referenceType": "Organizes",
+    "nodeId": Joint0.nodeId
+  });
+
+  viewJoints.addReference({
+    "referenceType": "Organizes",
+    "nodeId": Joint1.nodeId
+  });
+
+  viewJoints.addReference({
+    "referenceType": "Organizes",
+    "nodeId": Joint2.nodeId
+  });
+
+  viewJoints.addReference({
+    "referenceType": "Organizes",
+    "nodeId": Joint3.nodeId
+  });
+
+  viewJoints.addReference({
+    "referenceType": "Organizes",
+    "nodeId": Joint4.nodeId
+  });
+
+  viewJoints.addReference({
+    "referenceType": "Organizes",
+    "nodeId": Joint5.nodeId
+  });
+
+  coreServer.debugLog("create dynamic address space done");
+  node.warn("construction of new address space for OPC UA done");
+
+  done();
+}
