@@ -71,85 +71,66 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 - Set the variable to 0 ("isoInputs"): line 27
 
-`this.sandboxFlowContext.set("isoInputs", 0);`
+```
+this.sandboxFlowContext.set("isoInputs", 0); //change "isoInputs"
+```
 
 - Create the device ("Universal Robot"): line 45 - 47 
-
-`const myDevice = namespace.addFolder(rootFolder.objects, {`
-
-`"browseName": "Universal Robot"`
-
-`});`
+```
+const myDevice = namespace.addFolder(rootFolder.objects, {
+"browseName": "Universal Robot" //change "Universal Robot"
+});
+```
 
 - Create the namespace ("Digital InputOutput"): line 49
-
-`const DigitalInputOutput = namespace.addFolder(myDevice, { "browseName": "Digital InputOutput" });`
+```
+const DigitalInputOutput = namespace.addFolder(myDevice, { "browseName": "Digital InputOutput" }); 	//change "Digital InputOutput
+```
 
 - place the variable on the namespace and name it ("isoInputs" and "Inputs"): line 50
-
-`const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"});`
+```
+const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"}); 				//change "isoInputs" in the start and "Inputs" in the end
+```
 
 - configere the variable as a OPC UA object ("isoInputs", "Input", "s=Isolated_Input", "Double"): line 61 - 82
-
-`//Digital input`
-
-`  const DigitalInput = namespace.addVariable({`
-
-`    "organizedBy": isoInputs,`
-
-`    "browseName": "Input",`
-
-`    "nodeId": "ns=1;s=Isolated_Input",`
-
-`    "dataType": "Double",`
-
-`    "value": {`
-
-`      "get": function() {`
-
-`        return new Variant({`
-
-`          "dataType": DataType.Double,`
-
-`          "value": flexServerInternals.sandboxFlowContext.get("isoInput")`
-
-`        });`
-
-`      },`
-
-`      "set": function(variant) {`
-
-`        flexServerInternals.sandboxFlowContext.set(`
-
-`          "isoInput",`
-
-`          parseFloat(variant.value)`
-
-`        );`
-
-`        return opcua.StatusCodes.Good;`
-
-`      }`
-
-`    }`
-
-`  });`
+```
+//Digital input
+  const DigitalInput = namespace.addVariable({
+    "organizedBy": isoInputs, 																		//change "isoInputs"
+    "browseName": "Input", 																			//change "Input"
+    "nodeId": "ns=1;s=Isolated_Input", 																//change "Isolated_Input"
+    "dataType": "Double", 																			//change "Double"
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoInput") 							//change "IsoInput"
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoInput", 																				//change "isoInput"
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });
+```
 
 - configere a view on the server ("UR-Digital-Input-Output"): line 241 - 244
-
-`  const viewDIO = namespace.addView({`
-
-`    "organizedBy": rootFolder.views,`
-	
-`    "browseName": "UR-Digital-Input-Output"`
- 
-` });`
+```
+  const viewDIO = namespace.addView({
+    "organizedBy": rootFolder.views,
+    "browseName": "UR-Digital-Input-Output"															//change "UR-Digital-Input-Output"
+ });
+```
   
 - add a reference to the view ("DigitalInput.nodeId": line 252 - 255
 ```
   viewDIO.addReference({
     "referenceType": "Organizes",
-    "nodeId": DigitalInput.nodeId
+    "nodeId": DigitalInput.nodeId																	//change "DigitalInput.nodeId"
   });
 ```
   
