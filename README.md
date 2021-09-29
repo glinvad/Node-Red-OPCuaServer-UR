@@ -72,7 +72,7 @@ When the data are avalible globally via the function blocks the servers adresse 
 - Set the variable to 0 ("isoInputs"): line 27
 
 ```
-this.sandboxFlowContext.set("isoInputs", 0); //change "isoInputs"
+this.sandboxFlowContext.set("isoInputs", 0);							//change "isoInputs"
 ```
 
 - Create the device ("Universal Robot"): line 45 - 47 
