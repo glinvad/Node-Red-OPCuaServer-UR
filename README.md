@@ -96,10 +96,10 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
 //Digital input
   const DigitalInput = namespace.addVariable({
-    "organizedBy": isoInputs,	//change "isoInputs"
-    "browseName": "Input",	//change "Input"
-    "nodeId": "ns=1;s=Isolated_Input",	//change "Isolated_Input"
-    "dataType": "Double",	//change "Double"
+    "organizedBy": isoInputs,				//change "isoInputs"
+    "browseName": "Input",				//change "Input"
+    "nodeId": "ns=1;s=Isolated_Input",			//change "Isolated_Input"
+    "dataType": "Double",					//change "Double"
     "value": {
       "get": function() {
         return new Variant({
