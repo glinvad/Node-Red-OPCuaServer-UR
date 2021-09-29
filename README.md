@@ -47,6 +47,7 @@ REMEMBER TO CHANGE THE IP TO A MODBUS SERVER THAT HAVE RELEVANT DATA AVALIABLE
 - Have some fun with the data :)
 
 **Change the pull from holding register**
+
 ![FC3 holding register](https://github.com/glinvad/Node-Red-OPCuaServer-UR/blob/main/Pictures/SettingUpGetHOLDING.jpg)
 
 **Making data ready for the server**
@@ -59,7 +60,7 @@ The OPC UA Compact server can be setup by dobble clicking on it.
 
 ![OPC UA Compact server](https://github.com/glinvad/Node-Red-OPCuaServer-UR/blob/main/Pictures/OPCUACompactserver.jpg)
 
-When the data are avalible globally via the function blocks the servers adresse space can configurede. **See the file: Node-Red Code\OPCUA-Compact-server-adress-space.json**.
+When the data are avalible globally via the function blocks the servers adresse space can configurede. *See the file: Node-Red Code\OPCUA-Compact-server-adress-space.json*.
 
 **How to add a new data point to the server**
 1. Put the data as a global variable, here the variable are "isoOutput" and "IsoInput"
@@ -67,8 +68,65 @@ When the data are avalible globally via the function blocks the servers adresse 
 ![Ready data for Server](https://github.com/glinvad/Node-Red-OPCuaServer-UR/blob/main/Pictures/FunctionSetGlobalDataToOPCUAserver.jpg)
 
 2. Open the server and edit the address space (From here the focus will be en the variable "isoInput"). 
-Line 27 'this.sandboxFlowContext.set("isoInputs", 0);'
 
+- Set the variable to 0: line 27
+
+`this.sandboxFlowContext.set("isoInputs", 0);`
+
+- Create the device: line 45 - 47 
+
+`const myDevice = namespace.addFolder(rootFolder.objects, {"browseName": "Universal Robot"});`
+
+- Create the namespace: line 49
+
+`const DigitalInputOutput = namespace.addFolder(myDevice, { "browseName": "Digital InputOutput" });`
+
+- place the variable on the namespace and name it : line 50
+
+`const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"});`
+
+- configere the variable as a OPC UA object: line 61 - 82
+
+`//Digital input
+  const DigitalInput = namespace.addVariable({
+    "organizedBy": isoInputs,
+    "browseName": "Input",
+    "nodeId": "ns=1;s=Isolated_Input",
+    "dataType": "Double",
+    "value": {
+      "get": function() {
+        return new Variant({
+          "dataType": DataType.Double,
+          "value": flexServerInternals.sandboxFlowContext.get("isoInput")
+        });
+      },
+      "set": function(variant) {
+        flexServerInternals.sandboxFlowContext.set(
+          "isoInput",
+          parseFloat(variant.value)
+        );
+        return opcua.StatusCodes.Good;
+      }
+    }
+  });`
+
+- configere a view on the server: line 241 - 244
+`  const viewDIO = namespace.addView({
+    "organizedBy": rootFolder.views,
+    "browseName": "UR-Digital-Input-Output"
+  });`
+  
+- add a reference to the view: line 252 - 255
+`  viewDIO.addReference({
+    "referenceType": "Organizes",
+    "nodeId": DigitalInput.nodeId
+  });`
+  
+- deploy the Node-Red and wait for the server to light up green 
+
+![OPC UA Server active](https://github.com/glinvad/Node-Red-OPCuaServer-UR/blob/main/Pictures/OPCServeractive.jpg)
+
+- connect to the server via a client
 
 
 
