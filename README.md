@@ -69,11 +69,11 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 2. Open the server and edit the address space (From here the focus will be en the variable "isoInput"). 
 
-- Set the variable to 0: line 27
+- Set the variable to 0 ("isoInputs"): line 27
 
 `this.sandboxFlowContext.set("isoInputs", 0);`
 
-- Create the device: line 45 - 47 
+- Create the device ("Universal Robot"): line 45 - 47 
 
 `const myDevice = namespace.addFolder(rootFolder.objects, {`
 
@@ -81,21 +81,21 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 `});`
 
-- Create the namespace: line 49
+- Create the namespace ("Digital InputOutput"): line 49
 
 `const DigitalInputOutput = namespace.addFolder(myDevice, { "browseName": "Digital InputOutput" });`
 
-- place the variable on the namespace and name it : line 50
+- place the variable on the namespace and name it ("isoInputs" and "Inputs"): line 50
 
 `const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"});`
 
-- configere the variable as a OPC UA object: line 61 - 82
+- configere the variable as a OPC UA object ("isoInputs", "Input", "s=Isolated_Input", "Double"): line 61 - 82
 
 `//Digital input`
 
 `  const DigitalInput = namespace.addVariable({`
 
-`    "organizedBy": **isoInputs**,`
+`    "organizedBy": isoInputs,`
 
 `    "browseName": "Input",`
 
@@ -135,7 +135,7 @@ When the data are avalible globally via the function blocks the servers adresse 
 
 `  });`
 
-- configere a view on the server: line 241 - 244
+- configere a view on the server ("UR-Digital-Input-Output"): line 241 - 244
 
 `  const viewDIO = namespace.addView({`
 
@@ -145,7 +145,7 @@ When the data are avalible globally via the function blocks the servers adresse 
  
 ` });`
   
-- add a reference to the view: line 252 - 255
+- add a reference to the view ("DigitalInput.nodeId": line 252 - 255
 
 `  viewDIO.addReference({`
 
