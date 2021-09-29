@@ -89,27 +89,27 @@ const DigitalInputOutput = namespace.addFolder(myDevice, { "browseName": "Digita
 
 - place the variable on the namespace and name it ("isoInputs" and "Inputs"): line 50
 ```
-const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"}); 				//change "isoInputs" in the start and "Inputs" in the end
+const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs"});	//change "isoInputs" in the start and "Inputs" in the end
 ```
 
 - configere the variable as a OPC UA object ("isoInputs", "Input", "s=Isolated_Input", "Double"): line 61 - 82
 ```
 //Digital input
   const DigitalInput = namespace.addVariable({
-    "organizedBy": isoInputs, 																		//change "isoInputs"
-    "browseName": "Input", 																			//change "Input"
-    "nodeId": "ns=1;s=Isolated_Input", 																//change "Isolated_Input"
-    "dataType": "Double", 																			//change "Double"
+    "organizedBy": isoInputs,	//change "isoInputs"
+    "browseName": "Input",	//change "Input"
+    "nodeId": "ns=1;s=Isolated_Input",	//change "Isolated_Input"
+    "dataType": "Double",	//change "Double"
     "value": {
       "get": function() {
         return new Variant({
           "dataType": DataType.Double,
-          "value": flexServerInternals.sandboxFlowContext.get("isoInput") 							//change "IsoInput"
+          "value": flexServerInternals.sandboxFlowContext.get("isoInput")	//change "IsoInput"
         });
       },
       "set": function(variant) {
         flexServerInternals.sandboxFlowContext.set(
-          "isoInput", 																				//change "isoInput"
+          "isoInput",	//change "isoInput"
           parseFloat(variant.value)
         );
         return opcua.StatusCodes.Good;
@@ -122,7 +122,7 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
   const viewDIO = namespace.addView({
     "organizedBy": rootFolder.views,
-    "browseName": "UR-Digital-Input-Output"															//change "UR-Digital-Input-Output"
+    "browseName": "UR-Digital-Input-Output"	//change "UR-Digital-Input-Output"
  });
 ```
   
@@ -130,7 +130,7 @@ const isoInputs = namespace.addFolder(DigitalInputOutput, {"browseName": "Inputs
 ```
   viewDIO.addReference({
     "referenceType": "Organizes",
-    "nodeId": DigitalInput.nodeId																	//change "DigitalInput.nodeId"
+    "nodeId": DigitalInput.nodeId	//change "DigitalInput.nodeId"
   });
 ```
   
