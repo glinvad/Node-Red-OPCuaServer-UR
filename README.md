@@ -92,26 +92,47 @@ When the data are avalible globally via the function blocks the servers adresse 
 - configere the variable as a OPC UA object: line 61 - 82
 
 `//Digital input`
+
 `  const DigitalInput = namespace.addVariable({`
+
 `    "organizedBy": isoInputs,`
+
 `    "browseName": "Input",`
+
 `    "nodeId": "ns=1;s=Isolated_Input",`
+
 `    "dataType": "Double",`
+
 `    "value": {`
+
 `      "get": function() {`
+
 `        return new Variant({`
+
 `          "dataType": DataType.Double,`
+
 `          "value": flexServerInternals.sandboxFlowContext.get("isoInput")`
+
 `        });`
+
 `      },`
+
 `      "set": function(variant) {`
+
 `        flexServerInternals.sandboxFlowContext.set(`
+
 `          "isoInput",`
+
 `          parseFloat(variant.value)`
+
 `        );`
+
 `        return opcua.StatusCodes.Good;`
+
 `      }`
+
 `    }`
+
 `  });`
 
 - configere a view on the server: line 241 - 244
